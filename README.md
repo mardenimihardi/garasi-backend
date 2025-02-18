@@ -1,28 +1,52 @@
-# Garasi Backend
+## Garasi Backend
 
-This is a backend project using TypeScript, Express, and other tools.
+A backend project built with **TypeScript** and **Express**.
 
-## Getting Started
+## 🚀 Getting Started
 
-### Prerequisites
+### 📌 Prerequisites
 
-- Node.js
-- npm or yarn
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
 
-### Installation
+## ⚙️ Installation
 
-1. Clone the repository
-2. Run `npm install` or `yarn install`
+1. Clone the repository:
+   ```sh
+   git clone <repository-url>
+   cd garasi-backend
+   ```
+2. Install dependencies:
+   ```sh
+   npm install  # or yarn install
+   ```
 
-### Running the Project
+## ▶️ Running the Project
 
-- Development: `npm run dev`
-- Start: `npm run start`
+### Development Mode:
+```sh
+npm run dev
+```
 
-### Environment Variables
+### Production Mode:
+```sh
+npm run start
+```
 
-- `host`: Host address for the server 
-- `port`: Port number for the server
-- `pgURL`: PostgreSQL connection URL
-- `pathPublic`: Path to the public directory
-- `pathImages`: Path to the images directory
+## 🔧 Configuration
+
+Create a `.env` file and set the following environment variables:
+
+```env
+HOST=your-host
+PORT=your-port
+PG_URL=your-database-url
+PATH_PUBLIC=public
+PATH_IMAGES=images
+```
+
+---
+
+This README provides a concise and structured guide for setting up and running the backend project. Happy coding! 🚀
+
