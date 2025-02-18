@@ -3,7 +3,7 @@ import { Client } from '../config/pg'
 interface IImageRepository {
     findAll(): Promise<any>;
     findOne(id: string): Promise<any>;
-    create(uploadedData: Array<{ title: string, path: string }>): Promise<any>;
+    create(uploadedData: Array<{ title: string, url: string }>): Promise<any>;
     delete(id: string): Promise<any>;
     update(id: string, title: string): Promise<any>;
 } 
@@ -29,10 +29,10 @@ class ImageRepository implements IImageRepository {
         }
     }
 
-    async create(uploadedData: Array<{ title: string, path: string }>): Promise<any> {
+    async create(uploadedData: Array<{ title: string, url: string }>): Promise<any> {
         try {
-            const data = uploadedData.map((item) => `('${item.title}', '${item.path}')`)
-            return await this.db.query(`INSERT INTO images (title, path) VALUES ${data.join(',')}`)
+            const data = uploadedData.map((item) => `('${item.title}', '${item.url}')`)
+            return await this.db.query(`INSERT INTO images (title, url) VALUES ${data.join(',')}`)
         } catch (error) {
             console.log(error)
         }

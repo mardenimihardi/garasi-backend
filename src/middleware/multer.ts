@@ -3,8 +3,8 @@ import fs from 'fs'
 import path from 'path';
 import config from '../config/config';
 
-const pathPublic = config.pathPublic
-const pathImages = config.pathImages
+const pathPublic = config.PATH_PUBLIC
+const pathImages = config.PATH_IMAGES
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {

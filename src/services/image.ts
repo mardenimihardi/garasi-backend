@@ -5,7 +5,7 @@ import path from "path";
 
 interface IImageService {
     getAll(): Promise<any>;
-    upload(uploadedData: Array<{ title: string, path: string }>): Promise<any>;
+    upload(uploadedData: Array<{ title: string, url: string }>): Promise<any>;
     delete(id: string): Promise<any>;
     update(id: string, title: string): Promise<any>;
 } 
@@ -15,11 +15,11 @@ class ImageService implements IImageService {
 
     async getAll(): Promise<any> {
         const data = await this.imageRepository.findAll()
-        data.forEach((item: any) => item.path = path.join(config.host+':'+config.port, item.path))
+        data.forEach((item: any) => item.url = `${config.HOST}:${config.PORT}/${item.url}`) 
         return data
     }
 
-    async upload(uploadedData: Array<{ title: string, path: string }>): Promise<any> {
+    async upload(uploadedData: Array<{ title: string, url: string }>): Promise<any> {
         return await this.imageRepository.create(uploadedData)
     }
 
@@ -29,8 +29,8 @@ class ImageService implements IImageService {
             throw new Error('Data not found')
         }
         
-        if (fs.existsSync(`./public/images/${data.path}`)) {
-            fs.unlinkSync(`./public/images/${data.path}`)
+        if (fs.existsSync(`./public/images/${data.url}`)) {
+            fs.unlinkSync(`./public/images/${data.url}`)
         }
         return await this.imageRepository.delete(id)
     }
@@ -43,7 +43,7 @@ class ImageService implements IImageService {
 
         await this.imageRepository.update(id, title)
         const result = await this.imageRepository.findOne(id)
-        result.path = path.join(config.host+':'+config.port, data.path)
+        result.url = `${config.HOST}:${config.PORT}/${data.url}`
         return result
     }
 }

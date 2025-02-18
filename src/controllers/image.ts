@@ -28,13 +28,13 @@ class ImageController implements IImageController {
                 res.status(400).json({ message: 'The number of titles must match the number of images' });
             }
 
-            let uploadedData: Array<{ title: string, path: string }> = files.map((file, index) => ({
+            let uploadedData: Array<{ title: string, url: string }> = files.map((file, index) => ({
                 title: titles[index],
-                path: path.join(config.pathImages, file.filename)
+                url: `${config.PATH_IMAGES}/${file.filename}`
             }));
    
             await this.imageService.upload(uploadedData).then((data: any) => {
-                uploadedData.forEach((item: any) => item.path = path.join(config.host+':'+config.port, item.path))
+                uploadedData.forEach((item: any) => item.url = `${config.HOST}:${config.PORT}/${item.url}`)
                 res.status(200).json({ success: true, uploadedItems: uploadedData })
             })
         } catch (error) {

@@ -104,7 +104,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+# .env
 .env_prod
 .env_dev
 .env_*

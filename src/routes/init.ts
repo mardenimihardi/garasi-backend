@@ -11,7 +11,7 @@ class Route {
         router.delete('/:id', this.controller.imageController.delete);
         router.patch('/:id', this.controller.imageController.update);
         router.get('/', this.controller.imageController.getAll);
-        router.post('/', upload.array('images[]'), this.controller.imageController.upload);
+        router.post('/', upload.array('images'), this.controller.imageController.upload);
 
         return router;
     }
