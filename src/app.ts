@@ -18,6 +18,7 @@ const service = new Service(repository.init())
 const controller = new Controller(service.init())
 const route = new Route(controller.init())
 
+app.get('/', (req, res) => {res.send('Hello World!')})
 app.use('/api/image', route.imageRoutes());
 
 app.listen(port, () => {
