@@ -12,7 +12,19 @@ const port = config.PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'], origin: '*' }));
+app.use(cors({ 
+  origin: '*', // Mengizinkan semua domain
+  methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+// Menangani preflight requests secara global
+app.options('*', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, PATCH, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.status(204).end();
+});
 app.use(express.static('public'));
 
 const repository = new Repository()
