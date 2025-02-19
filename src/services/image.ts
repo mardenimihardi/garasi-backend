@@ -14,9 +14,7 @@ class ImageService implements IImageService {
     constructor(private imageRepository: IImageRepository) {}
 
     async getAll(): Promise<any> {
-        const data = await this.imageRepository.findAll()
-        data.forEach((item: any) => item.url = `${config.HOST}:${config.PORT}/${item.url}`) 
-        return data
+        return await this.imageRepository.findAll()
     }
 
     async upload(uploadedData: Array<{ title: string, url: string }>): Promise<any> {
@@ -42,9 +40,7 @@ class ImageService implements IImageService {
         }
 
         await this.imageRepository.update(id, title)
-        const result = await this.imageRepository.findOne(id)
-        result.url = `${config.HOST}:${config.PORT}/${data.url}`
-        return result
+        return await this.imageRepository.findOne(id)
     }
 }
 

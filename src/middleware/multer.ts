@@ -2,11 +2,13 @@ import multer from 'multer'
 import fs from 'fs'
 import path from 'path';
 import config from '../config/config';
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import cloudinary from "../config/cloudinary";
 
 const pathPublic = config.PATH_PUBLIC
 const pathImages = config.PATH_IMAGES
 
-const storage = multer.diskStorage({
+let storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(pathPublic, pathImages));
     },
@@ -15,6 +17,21 @@ const storage = multer.diskStorage({
         cb(null, Date.now() + extension);
     },
 });
+
+if (config.CLOUDINARY_ENABLED === 'true') {
+    storage = new CloudinaryStorage({
+        cloudinary: cloudinary,
+        params: async (req, file) => {
+            const extension = path.extname(file.originalname);
+            return {
+                folder: "images",
+                format: file.mimetype.split("/")[1],
+                public_id: Date.now() + extension,
+            };
+        },
+    });
+}
+
 
 const fileFilter = (req: any, file: any, cb: any) => {
     const allowedTypes = /jpeg|jpg|png|gif/;

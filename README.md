@@ -44,6 +44,10 @@ PORT=your-port
 PG_URL=your-database-url
 PATH_PUBLIC=public
 PATH_IMAGES=images
+CLOUDINARY_ENABLED=true
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
 ```
 
 ---

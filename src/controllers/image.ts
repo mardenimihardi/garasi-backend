@@ -30,11 +30,10 @@ class ImageController implements IImageController {
 
             let uploadedData: Array<{ title: string, url: string }> = files.map((file, index) => ({
                 title: titles[index],
-                url: `${config.PATH_IMAGES}/${file.filename}`
+                url: file.path
             }));
    
             await this.imageService.upload(uploadedData).then((data: any) => {
-                uploadedData.forEach((item: any) => item.url = `${config.HOST}:${config.PORT}/${item.url}`)
                 res.status(200).json({ success: true, uploadedItems: uploadedData })
             })
         } catch (error) {
